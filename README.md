@@ -2,3 +2,4 @@
 
 Wpisz w konsoli npx cypress open
 Wybierz przegladarke Chrome
+Wybierz firstTest
