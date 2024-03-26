@@ -5,7 +5,7 @@ export class Login {
 
   login(email, password) {
     cy.get("#user_email").type(email);
-    cy.get("user_password").type(password);
+    cy.get("#user_password").type(password);
     cy.contains("Log in").click();
   }
 }
