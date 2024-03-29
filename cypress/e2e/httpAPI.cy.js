@@ -2,7 +2,6 @@ describe("httpbin tests", () => {
   it("response code should be 200 - no method", () => {
     cy.request("https://httpbin.org").then((response) => {
       const status = response.status;
-
       assert.equal(200, status);
     });
   });
@@ -126,7 +125,7 @@ describe("httpbin tests", () => {
   });
 });
 
-describe("httpbin tests", () => {
+describe("reqres tests", () => {
   const request = {
     method: "GET",
     url: "https://reqres.in/api/users/2",
