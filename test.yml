@@ -1,0 +1,46 @@
+config:
+  target: "https://tierion.com/chainpoint/"
+  phases:
+    - duration: 60
+      arrivalRate: 2
+      maxVusers: 10
+      name: Artillery First Test
+    - duration: 5
+      arrivalRate: 30
+      name: Artillery Second Test
+    - duration: 5
+      arrivalRate: 2
+      name: Artillery Third Test
+  payload:
+    - path: "keywords.csv"
+      fields:
+        - "fruit"
+        - "car"
+      order: sequence
+      skipHeader: false
+      cast: false
+      skipEmptyLines: true
+  plugins:
+    ensure:
+      thresholds:
+        - http.response_time.p95: 10
+        - http.response_time.max: 2000
+      conditions:
+        - expression: vusers.failed == 0
+        - expression: "http.request_rate >= 2 and http.response_time.max < 600"
+
+scenarios:
+  - name: Getting a resource
+    flow:
+      - get:
+          url: "{{ target }}get"
+      - post:
+          url: "{{ target}}post"
+          json:
+            username: "Test User"
+            password: "Temp Password"
+          capture:
+            - json: "$.json"
+              as: "request_body"
+            - json: "$.headers.Host"
+              as: "host"
