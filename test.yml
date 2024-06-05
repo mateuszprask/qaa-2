@@ -14,8 +14,8 @@ config:
   payload:
     - path: "keywords.csv"
       fields:
-        - "fruit"
-        - "car"
+        - "fruits"
+        - "cars"
       order: sequence
       skipHeader: false
       cast: false
